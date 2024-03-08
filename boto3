@@ -1,0 +1,38 @@
+import boto3
+
+# Create an EC2 resource object
+ec2 = boto3.resource('ec2')
+
+# Define the filter for instances with the tag "Name=stage"
+ec2_tag = [{'Name': 'tag:Name', 'Values': ['stage']}]
+
+# Retrieve the instances that match the filter
+instances = ec2.instances.filter(Filters=ec2_tag)
+
+# Stop each matching instance
+for instance in instances:
+    instance.stop()
+    print(f"Stopped instance: {instance.id}")
+======================================================================
+import boto3
+
+# Create an EC2 resource object
+ec2 = boto3.resource('ec2')
+
+# Define the filter for instances with the tag "Name=stage"
+ec2_tag = [{'Name': 'tag:Name', 'Values': ['stage']}]
+
+# Retrieve the instances that match the filter
+#instances = ec2.instances.filter(Filters=ec2_tag)
+
+# Stop each matching instance
+for instance in ec2.instances.filter(Filters=ec2_tag):
+    instance.stop()
+    print(f"Stopped instance: {instance.id}")
+============================================================================
+Stop and Start EC2 instance a regular basis
+Rotate IAM Keys
+Cleanup AMI
+Cleanup unused EBS Volume
+Creating EBS Snapshot
+Cleanup EBS Snapshot
